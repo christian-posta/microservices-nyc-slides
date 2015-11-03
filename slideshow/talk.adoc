@@ -1,0 +1,507 @@
+:footer_copyright: @christianposta
+:imagesdir: images/
+:speaker: Christian Posta
+:speaker-title: Principal Middleware Architect
+:speaker-email: christian@redhat.com
+:speaker-blog: http://blog.christianposta.com
+:speaker-twitter: http://twitter.com/christianposta[@christianposta]
+:talk-speaker: {speaker}
+:talk-name: Microservices in the Real World
+:talk-date: 11/04/2015
+
+[#cover,data-background-image="revealjs-redhat/image/1156524-bg_redhat.png" data-background-color="#cc0000"]
+== {blank-space}
+
+[#block,width="200px",left="70px",top="0px"]
+image::{revealjs_cover_image}[]
+
+[#cover-h1,width="600px",left="0px",top="200px"]
+{talk-name}
+
+[#cover-h2,width="800px",left="0px",top="450px"]
+{speaker} +
+{talk-date}
+
+// ************** who - christian ********
+[#who]
+== Who
+
+[.noredheader,cols="30,70"]
+|===
+| image:ceposta.png[width="90%",height="100%"]
+| {speaker-title}
+
+Blog: {speaker-blog}
+
+Twitter: {speaker-twitter}
+
+Email: {speaker-email} |
+|===
+
+* Committer on Apache ActiveMQ, Apache Camel, Fabric8
+* Architect, technology evangelist, recovering consultant
+* Spent a lot of time working with one of the largest Microservices, web-scale, unicorn companies
+* Frequent blogger and speaker about open-source, cloud, microservices
+
+
+
+// ************** transition page ************
+[#microserviceshelpme, data-background-image="revealjs-redhat/image/1156524-bg_redhat.png" data-background-color="#cc0000"]
+== {blank-space}
+
+[#block,width="200px",left="70px",top="0px"]
+image::{revealjs_cover_image}[]
+
+[#cover-h1,width="600px",left="0px",top="400px"]
+*Will Microservices Help me?*
+
+
+// ************** Intro ********
+[#cartoon-need-for-change]
+== {blank-space}
+
+[#block,width="200px",top="-25px",left="-25px"]
+image:cartoon-need-for-change.jpg[width="80%",height="80%"]
+
+
+// ************** Intro ********
+[#complicated-complex]
+== {blank-space}
+
+[#block,width="200px",top="-25px",left="-25px"]
+image:complexsimple.png[width="140%",height="140%"]
+
+
+// ************** Intro ********
+[#how-deal-complexity]
+== {blank-space}
+
+[#block,width="300px",top="250px",left="125px",font_size="50px"]
+How do we deal with complexity?
+
+// ************** Intro ********
+[#goals-1]
+== Increased interoperability
+
+* Get more systems to share data
+* Expose APIs
+* More value from existing systems
+* Expose for Mobile, Big Data, SaaS
+
+// ************** Intro ********
+[#goals-2]
+== Increased vendor diversity options
+
+* Pick best of breed technology
+* Be able to consume new technology innovation
+* Diversification when required
+* Focus on standards and not proprietary interfaces
+
+// ************** Intro ********
+[#goals-3]
+== Increased federation
+
+* United while maintaining autonomoy
+* Deployments of standardized, composable services
+* Extra up front attention, investment at design time
+
+// ************** Intro ********
+[#goals-4]
+== Increased business and technology alignment
+
+* Hands on from domain experts
+* Going from tactical applications to agile business applications
+* Can adapt and change when the business does
+
+
+// ************** Intro ********
+[#goals-5]
+== Increased ROI
+
+* Additional up-front expense and effort
+* Position as IT assets
+* Reuse as the main goal
+
+// ************** Intro ********
+[#goals-6]
+== Increased organization agility
+
+* How an organization responds to change
+* IT as the bottleneck
+* Reuse, Reuse, Reuse
+* Services as cogs in the machine
+* Reassemble the cogs to produce differently operating machine
+
+
+// ************** Intro ********
+[#goals-all]
+== Sounds very familiar... that was SOA
+
+* Increased *interoperability*
+* Increased *vendor diversity options*
+* Increased *federation*
+* Increased *business and technology alignment*
+* Increased *ROI*
+* Reduced *IT burden*
+* Increased *organization agility*
+
+
+[#block,width="200px",top="435px",left="220px"]
+image:soa_middleware.png[width="110%",height="110%"]
+
+
+
+// ************** Intro ********
+[#going-about-it-wrong]
+== {blank-space}
+
+
+[#block,width="300px",top="150px",left="50px",font_size="50px"]
+To deal with complexity, we need to build systems that are _flexible_
+
+[#block,width="300px",top="350px",left="50px",font_size="30px"]
+*Except* we’re using *old premises* that fundamentally and intrinsically are *at odds with the goal of flexibility*.
+
+
+
+// ************** Intro ********
+[#soa-middleware-reuse]
+== Efficient, replaceable, reusable pieces
+
+[#block,width="200px",top="120px",left="150px"]
+image:softwarereuse.png[width="100%",height="100%"]
+
+
+[#block,width="300px",top="500px",left="50px"]
+Blindly following this model will lead practitioners to believe they are building flexible systems, when they’re doing the opposite!
+
+
+
+// ************** Intro ********
+[#flexibility-not-efficiency]
+== {blank-space}
+
+
+[#block,width="300px",top="150px",left="50px",font_size="50px"]
+We need to build systems for *flexibility*, not just _efficiency_
+
+
+// ************** Intro ********
+[#trainscars]
+== {blank-space}
+
+[#block,width="200px",top="55px",left="55px"]
+image:trainscars.jpg[width="120%",height="120%"]
+
+
+// ************** Intro ********
+[#production-line]
+== {blank-space}
+
+[#block,width="200px",top="75px",left="75px"]
+image:production-line.png[width="100%",height="100%"]
+
+
+// ************** Intro ********
+[#production-machine]
+== {blank-space}
+
+[#block,width="200px",top="75px",left="75px"]
+image:machine.png[width="100%",height="100%"]
+
+
+// ************** Intro ********
+[#idiotproof]
+== {blank-space}
+
+[#block,width="200px",top="10px",left="75px"]
+image:idiotproof.png[width="150%",height="150%"]
+
+// ************** Intro ********
+[#flexibility-not-efficiency2]
+== {blank-space}
+
+
+[#block,width="300px",top="150px",left="50px",font_size="50px"]
+Optimizing for _efficiency_ reduces *flexibility* by definition
+
+
+
+// ************** Intro ********
+[#we-want-conways-law2]
+== We want Conway's law
+
+[#block,width="300px",top="150px",left="50px",font_size="40px"]
+We want flexible systems *and organizations* that can *adapt* to their complex environments, make changes without rigid *dependencies* and coordination, can *learn*, *experiment*, and exhibit *emergent behavior*.
+
+// ************** Intro ********
+[#how-build-flexibility]
+== {blank-space}
+
+[#block,width="300px",top="150px",left="50px",font_size="50px"]
+How do we build flexibility into the systems?
+
+
+// ************** Intro ********
+[#deps-deps-deps]
+== {blank-space}
+
+[#block,width="300px",top="150px",left="50px",font_size="50px"]
+Dependencies, dependencies, dependencies!
+
+// ************** transition page *************************************************************************************
+[#microservicesFTW, data-background-image="revealjs-redhat/image/1156524-bg_redhat.png" data-background-color="#cc0000"]
+== {blank-space}
+
+[#block,width="200px",left="70px",top="0px"]
+image::{revealjs_cover_image}[]
+
+[#cover-h1,width="600px",left="0px",top="400px"]
+*Microservices*
+
+// ************** Microservices ********
+[#what-are-microservices]
+== What are microservices
+
+* Single, self-contained, *autonomous*
+* Easy(er) to understand individually
+* Scalability
+* Testing independently
+* Individually deployed, has *own lifecycle*
+* Single service going down *should not* impact other services
+* Right technology stack for the problem (language, databases, etc)
+* Fail fast
+* Faster innovation, iteration
+
+
+// ************** Microservices ********
+[#microservices-different]
+== Microservices design considerations
+
+[#block,width="200px",top="150px",left="75px"]
+image:trifecta.png[width="150%",height="150%"]
+
+
+
+// ************** Microservices ********
+[#microservices-org]
+== Organization
+
+* Autonomous, self-directed teams
+* Transparency
+* Small (2-pizza rule)
+* Purpose, Trust, Empathy driven
+* Organizational structure to support self-directed teams
+* Respond quickly to change
+* Own services, delivery, operations
+* Build it, you own it
+* Use OpenSource as a model!!
+
+
+// ************** Microservices ********
+[#microservices-domain]
+== Domain Driven Design
+
+* Establish domain language
+* Understanding the links/relationships/dependencies between domain systems
+* Developing a model
+** conceptual
+** implementation
+** feedback loops
+* Boundaries around models
+* Abstractions, APIs, modularity
+
+// ************** Microservices ********
+[#microservices-distributed]
+== Distributed Systems
+
+* The network is unreliable
+* Design time coupling
+* Unintended, run-time coupling
+* Components will fail
+* Design for resilience, not just robustness
+
+// ************** Microservices ********
+[#microservices-dep-thinking]
+== Dependency Oriented Thinking at all levels
+
+* What components depend on the others
+* Which teams need to engage to make a change
+* What services need to be changed if one changes
+* Coordination, contention, synchronization, blocking
+* Hidden dependencies
+
+// ************** Microservices ********
+[#microservices-challenges]
+== Challenges adopting microservices
+
+* Complexity
+* Multiple databases, transactions
+* When to use it?
+* Organizational mismatch
+* Network overhead
+* Monitoring, logging, alerting
+* Lack of tooling
+* Just stick with monoliths?
+
+
+
+// ************** transition page *************************************************************************************
+[#casestudy, data-background-image="revealjs-redhat/image/1156524-bg_redhat.png" data-background-color="#cc0000"]
+== {blank-space}
+
+[#block,width="200px",left="70px",top="0px"]
+image::{revealjs_cover_image}[]
+
+[#cover-h1,width="600px",left="0px",top="400px"]
+*Simple Case Study*
+
+
+
+// ************** Case Study ********
+[#real-examples-microservices]
+== Typical order systems
+
+[#block,width="200px",top="100px",left="75px"]
+image:typicalsystems.png[width="150%",height="150%"]
+
+
+// ************** Case Study ********
+[#turtles]
+== Turtles FTW!
+
+[#block,width="200px",top="75px",left="175px"]
+image:turtles.gif[width="100%",height="100%"]
+
+// ************** Case Study ********
+[#syncorder]
+== Order execution path
+
+[#block,width="200px",top="100px",left="75px"]
+image:syncorder.png[width="150%",height="150%"]
+
+// ************** Case Study ********
+[#syncorder]
+== Order execution path
+
+[#block,width="200px",top="100px",left="75px"]
+image:failedmarketing.png[width="150%",height="150%"]
+
+// ************** Case Study ********
+[#make-changes]
+== Order execution path
+
+[#block,width="200px",top="100px",left="75px"]
+image:syncorder.png[width="150%",height="150%"]
+
+// ************** Case Study ********
+[#what-else-explore]
+== {blank-space}
+
+[#block,width="300px",top="150px",left="50px",font_size="40px"]
+Maybe we explore how other participants in a complex adaptive system interact?
+
+
+// ************** Case Study ********
+[#events-king]
+== {blank-space}
+
+[#block,width="300px",top="150px",left="50px",font_size="55px"]
+Events are king.
+
+
+// ************** Case Study ********
+[#messaging-to-rescue]
+== {blank-space}
+
+[#block,width="300px",top="150px",left="50px",font_size="50px"]
+Messaging to the rescue?
+
+
+// ************** Case Study ********
+[#pub-sub]
+== Publish / Subscribe
+
+* Publish interesting state changes
+* Publishers advertise what they'll announce
+* Subscribers decide whether they're interested
+* Subscribers can come and go
+* New implementations can be built without disturbing existing processes
+
+
+// ************** Case Study ********
+[#pub-sub-diagram]
+== {blank-space}
+
+[#block,width="200px",top="50px",left="75px"]
+image:pubsub.png[width="150%",height="150%"]
+
+
+// ************** Case Study ********
+[#pub-sub-advantages]
+== Publish / Subscribe advantages
+
+* Very flexible
+* Systems can go down and not impact each other
+* Processes can be augmented/changed without impact
+* Very low run-time coupling
+* Database/Storage implementations decoupled
+* Denormalized data
+
+// ************** Case Study ********
+[#pub-sub-disadvantages]
+== Disadvantages
+
+* Complex
+* Multi-datastore updates, transaction atomicity
+** Use EventSourcing!
+* Not used to thinking this way
+* Need reliable messaging
+* How are processes defined?
+* Denormalized data
+
+// ************** Case Study ********
+[#pub-sub-BPM]
+== Business Processes
+
+* Are they inherently step-by-step/sequential?
+* Cascading events
+* CQRS
+* Event flow == Processes
+
+// ************** Case Study ********
+[#flexibility-goals]
+== Overall design goals
+
+* Flexible system
+* Independent, autnonmous units
+* Very low coupling / dependencies
+
+
+// ************** Case Study ********
+[#flexibility-goals]
+== Additional considerations
+
+* Logging
+* Monitoring
+* Business level policies
+* Design for failure
+* Strong automated testing
+* Automated delivery pipelines
+* Able to test suite of services, not just individually
+* Need to be able to track, audit, and reliably update and rollback
+
+
+
+
+// *********************************
+[#questions]
+== Questions
+
+[.noredheader,cols="65,.<45"]
+|===
+
+.2+|image:questions.png[width="95%",height="95%"]
+a|* Twitter : *{speaker-twitter}*
+|===
+
